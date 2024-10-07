@@ -62,5 +62,17 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 10,
     },
+    weeklySummary: {
+        padding: 10,
+        margin: 10,
+        backgroundColor: '#f0f0f0',
+        borderRadius: 10,
+    },
+      
+    weeklySummaryText: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        margin: 5,
+      },
 });
 export default styles;

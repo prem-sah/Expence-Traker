@@ -1,7 +1,23 @@
-// expense_component.js
-
 import { Alert, Button, ScrollView, Text, View } from "react-native";
 import styles from "./styles";
+
+const calculateWeeklyIncomeAndExpense = (expenses) => {
+    const weeklyIncome = expenses.reduce((acc, curr) => {
+      if (curr.category === 'Income') {
+        acc += curr.amount;
+      }
+      return acc;
+    }, 0);
+  
+    const weeklyExpense = expenses.reduce((acc, curr) => {
+      if (curr.category !== 'Income') {
+        acc += curr.amount;
+      }
+      return acc;
+    }, 0);
+  
+    return { weeklyIncome, weeklyExpense };
+  };
 
 export default function ExpenseComponent({
     expenses,
@@ -9,6 +25,8 @@ export default function ExpenseComponent({
     chartData,
     setChartData,
 }) {
+    const { weeklyIncome, weeklyExpense } = calculateWeeklyIncomeAndExpense(expenses);
+
     return (
         <ScrollView
             style={{
@@ -28,6 +46,14 @@ export default function ExpenseComponent({
                     />
                 );
             })}
+            <View style={styles.weeklySummary}>
+                <Text style={styles.weeklySummaryText}>
+                    Weekly Income: {weeklyIncome}
+                </Text>
+                <Text style={styles.weeklySummaryText}>
+                    Weekly Expense: {weeklyExpense}
+                </Text>
+            </View>
         </ScrollView>
     );
 }
